@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "ts-rs-kotlin"
+
