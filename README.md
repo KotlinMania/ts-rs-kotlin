@@ -164,7 +164,7 @@ License: MIT
 
 ```kotlin
 dependencies {
-    implementation("io.github.kotlinmania:ts-rs-kotlin:0.1.0-SNAPSHOT")
+    implementation("io.github.kotlinmania:ts-rs-kotlin:0.1.0")
 }
 ```
 
