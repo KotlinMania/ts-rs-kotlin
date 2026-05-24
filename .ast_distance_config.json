@@ -1,5 +1,6 @@
 {
   "type": "port",
+  "parity_mode": false,
   "name": "ts-rs-kotlin",
   "source": {
     "path": "tmp/ts-rs/src",
