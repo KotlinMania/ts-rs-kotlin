@@ -13,6 +13,7 @@ import org.gradle.kotlin.dsl.support.serviceOf
 import org.gradle.process.ExecOperations
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
@@ -510,6 +511,12 @@ tasks.matching { it.name == "embedSwiftExportForXcode" }.configureEach {
             logger.lifecycle("embedSwiftExportForXcode: skipped because Xcode environment variables are not present")
         }
         hasXcodeEnvironment || swiftExportTaskDirectlyRequested
+    }
+}
+
+tasks.withType<KotlinNativeCompile>().configureEach {
+    if (name.startsWith("compileSwiftExport")) {
+        compilerOptions.allWarningsAsErrors.set(false)
     }
 }
 
