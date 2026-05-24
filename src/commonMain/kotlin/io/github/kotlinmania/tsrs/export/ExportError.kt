@@ -4,11 +4,11 @@ package io.github.kotlinmania.tsrs.export
 /**
  * An error which may occur when exporting a type.
  *
- * Each subclass corresponds to one variant of the upstream `ExportError` enum;
- * the [message] string mirrors the upstream `#[error("...")]` attribute on that
- * variant. The `Formatting` subclass corresponds to the upstream `format`
- * feature; in this port the variant is always available, because Kotlin
- * Multiplatform has no equivalent of Cargo build-time feature gating.
+ * Each subclass corresponds to one upstream export-error case. The [message]
+ * string mirrors the text upstream reports for that case. The [Formatting]
+ * subclass corresponds to upstream's optional formatting support; in this port
+ * the variant is always available because Kotlin Multiplatform has no matching
+ * build-time feature gate.
  */
 public sealed class ExportError(
     message: String,
