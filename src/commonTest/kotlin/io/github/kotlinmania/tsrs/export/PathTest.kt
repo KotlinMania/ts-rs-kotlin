@@ -1,4 +1,4 @@
-// port-lint: tests src/export/path.rs
+// port-lint: tests export/path.rs
 package io.github.kotlinmania.tsrs.export
 
 import kotlin.test.Test
