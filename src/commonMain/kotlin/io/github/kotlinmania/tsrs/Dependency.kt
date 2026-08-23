@@ -1,4 +1,4 @@
-// port-lint: source src/lib.rs
+// port-lint: source lib.rs
 package io.github.kotlinmania.tsrs
 
 /**
@@ -20,5 +20,20 @@ public data class Dependency(
         val byName = tsName.compareTo(other.tsName)
         if (byName != 0) return byName
         return outputPath.compareTo(other.outputPath)
+    }
+
+    public companion object {
+        /**
+         * Constructs a [Dependency] from the given type [type].
+         * If [type] is not exportable, returns null.
+         */
+        public fun fromTy(type: Ts): Dependency? {
+            val out = type.outputPath() ?: return null
+            return Dependency(
+                typeId = type.ident(),
+                tsName = type.ident(),
+                outputPath = out,
+            )
+        }
     }
 }

@@ -1,4 +1,4 @@
-// port-lint: source src/export/error.rs
+// port-lint: source export/error.rs
 package io.github.kotlinmania.tsrs.export
 
 /**
