@@ -13,7 +13,7 @@ private const val DECLARATION_START = "export type "
 
 private val exportPaths: MutableMap<String, MutableSet<String>> = mutableMapOf()
 
-public fun getExportPaths(): MutableMap<String, MutableSet<String>> = exportPaths
+public fun getExportPaths(): Map<String, Set<String>> = exportPaths
 
 public fun defaultOutDir(envDir: String? = null): String =
     envDir ?: "./bindings"
