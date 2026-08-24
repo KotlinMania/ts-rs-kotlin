@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 7/7 (100.0%)
-- **Function parity:** 39/42 matched (target 163) — 92.9%
-- **Class/type parity:** 7/13 matched (target 39) — 53.8%
-- **Combined symbol parity:** 46/55 matched (target 202) — 83.6%
+- **Files Present:** 7/81 (8.6%)
+- **Function parity:** 39/232 matched (target 163) — 16.8%
+- **Class/type parity:** 7/341 matched (target 39) — 2.1%
+- **Combined symbol parity:** 46/573 matched (target 202) — 8.0%
 - **Average inline-code cosine:** 0.32 (function body across 7 matched files)
 - **Average documentation cosine:** 0.25 (doc text across 7 matched files)
 - **Cheat-zeroed Files:** 2
@@ -27,9 +27,39 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. lib
+### 1. export.path
 
-- **Target:** `tsrs.Ts`
+- **Target:** `export.Path [PROVENANCE-FALLBACK]`
+- **Similarity:** 0.37
+- **Dependents:** 1
+- **Priority Score:** 1000206.3
+- **Functions:** 2/2 matched (target 11)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `export/path.rs` vs expected `export/path.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:export/path.rs` vs expected `export/path.rs`
+- **Proposed provenance header:** `// port-lint: source export/path.rs` (current: `// port-lint: source export/path.rs`)
+- **Proposed provenance header:** `// port-lint: tests export/path.rs` (current: `// port-lint: tests export/path.rs`)
+- **Lint issues:** 2
+
+### 2. export.error
+
+- **Target:** `export.ExportError [PROVENANCE-FALLBACK]`
+- **Similarity:** 1.00
+- **Dependents:** 1
+- **Priority Score:** 1000100.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 1/1 matched (target 7)
+- **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `export/error.rs` vs expected `export/error.rs`
+- **Proposed provenance header:** `// port-lint: source export/error.rs` (current: `// port-lint: source export/error.rs`)
+- **Lint issues:** 1
+
+### 3. lib
+
+- **Target:** `tsrs.Ts [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.15
 - **Dependents:** 0
 - **Priority Score:** 52808.5
@@ -37,11 +67,17 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `visit`, `fmt`
 - **Types:** 5/8 matched (target 6)
 - **Missing types:** `Visit`, `TypeVisitor`, `IsOption`
-- **Lint issues:** 2
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `lib.rs` vs expected `lib.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `lib.rs` vs expected `lib.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:lib.rs` vs expected `lib.rs`
+- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source lib.rs`)
+- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source lib.rs`)
+- **Proposed provenance header:** `// port-lint: tests lib.rs` (current: `// port-lint: tests lib.rs`)
+- **Lint issues:** 5
 
-### 2. export
+### 4. export
 
-- **Target:** `export.Export`
+- **Target:** `export.Export [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.48
 - **Dependents:** 0
 - **Priority Score:** 21505.2
@@ -49,11 +85,15 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `visit`
 - **Types:** 0/1 matched
 - **Missing types:** `Visit`
-- **Lint issues:** 1
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `export.rs` vs expected `export.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:export.rs` vs expected `export.rs`
+- **Proposed provenance header:** `// port-lint: source export.rs` (current: `// port-lint: source export.rs`)
+- **Proposed provenance header:** `// port-lint: tests export.rs` (current: `// port-lint: tests export.rs`)
+- **Lint issues:** 3
 
-### 3. chrono
+### 5. chrono
 
-- **Target:** `tsrs.Chrono`
+- **Target:** `tsrs.Chrono [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.26
 - **Dependents:** 0
 - **Priority Score:** 20807.4
@@ -61,21 +101,13 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/2 matched (target 12)
 - **Missing types:** `WithoutGenerics`, `OptionInnerType`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `chrono.rs` vs expected `chrono.rs`
+- **Proposed provenance header:** `// port-lint: source chrono.rs` (current: `// port-lint: source chrono.rs`)
+- **Lint issues:** 1
 
-### 4. export.path
+### 6. serde_json
 
-- **Target:** `export.Path`
-- **Similarity:** 0.37
-- **Dependents:** 0
-- **Priority Score:** 206.3
-- **Functions:** 2/2 matched (target 11)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 5. serde_json
-
-- **Target:** `tsrs.SerdeJson [ZERO]`
+- **Target:** `tsrs.SerdeJson [ZERO] [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 110.0
@@ -83,21 +115,13 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 1/1 matched (target 9)
 - **Missing types:** _none_
-
-### 6. export.error
-
-- **Target:** `export.ExportError`
-- **Similarity:** 1.00
-- **Dependents:** 0
-- **Priority Score:** 100.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 1/1 matched (target 7)
-- **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `serde_json.rs` vs expected `serde_json.rs`
+- **Proposed provenance header:** `// port-lint: source serde_json.rs` (current: `// port-lint: source serde_json.rs`)
+- **Lint issues:** 1
 
 ### 7. tokio
 
-- **Target:** `tsrs.Tokio [ZERO]`
+- **Target:** `tsrs.Tokio [ZERO] [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -105,6 +129,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 3)
 - **Missing types:** _none_
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tokio.rs` vs expected `tokio.rs`
+- **Proposed provenance header:** `// port-lint: source tokio.rs` (current: `// port-lint: source tokio.rs`)
+- **Lint issues:** 1
 
 ## Success Criteria
 
