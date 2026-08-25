@@ -13,7 +13,9 @@ public fun interface TypeVisitor {
 /**
  * Dependency accumulator implementing [TypeVisitor].
  */
-public class Visit(public val deps: MutableList<Dependency>) : TypeVisitor {
+public class Visit internal constructor(
+    internal val deps: MutableList<Dependency>,
+) : TypeVisitor {
     override fun visit(type: Ts) {
         Dependency.fromTy(type)?.let { deps.add(it) }
     }
