@@ -5,9 +5,9 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 7/7 (100.0%)
-- **Function parity:** 42/42 matched (target 180) — 100.0%
+- **Function parity:** 42/42 matched (target 182) — 100.0%
 - **Class/type parity:** 9/13 matched (target 44) — 69.2%
-- **Combined symbol parity:** 51/55 matched (target 224) — 92.7%
+- **Combined symbol parity:** 51/55 matched (target 226) — 92.7%
 - **Average inline-code cosine:** 0.33 (function body across 7 matched files)
 - **Average documentation cosine:** 0.25 (doc text across 7 matched files)
 - **Cheat-zeroed Files:** 2
@@ -33,7 +33,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.18
 - **Dependents:** 0
 - **Priority Score:** 22808.2
-- **Functions:** 20/20 matched (target 33)
+- **Functions:** 20/20 matched (target 34)
 - **Missing functions:** _none_
 - **Types:** 6/8 matched (target 7)
 - **Missing types:** `TypeVisitor`, `IsOption`
@@ -56,7 +56,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.53
 - **Dependents:** 0
 - **Priority Score:** 1504.7
-- **Functions:** 14/14 matched (target 17)
+- **Functions:** 14/14 matched (target 18)
 - **Missing functions:** _none_
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
