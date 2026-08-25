@@ -11,6 +11,15 @@ public fun interface TypeVisitor {
 }
 
 /**
+ * Dependency accumulator implementing [TypeVisitor].
+ */
+public class Visit(public val deps: MutableList<Dependency>) : TypeVisitor {
+    override fun visit(type: Ts) {
+        Dependency.fromTy(type)?.let { deps.add(it) }
+    }
+}
+
+/**
  * Marker interface for types without generic parameters.
  */
 public interface WithoutGenerics : Ts
@@ -24,15 +33,19 @@ public interface OptionInnerType
  * Dummy placeholder type for generics resolution.
  */
 public object Dummy : Ts {
-    override fun name(): String = ""
+    public fun fmt(): String = "Dummy"
+
+    override fun toString(): String = fmt()
+
+    override fun name(): String = "Dummy"
 
     override fun inline(): String = ""
 
-    override fun decl(): String = error("Dummy cannot be declared")
+    override fun decl(): String = error("${name()} cannot be declared")
 
-    override fun declConcrete(): String = error("Dummy cannot be declared")
+    override fun declConcrete(): String = error("${name()} cannot be declared")
 
-    override fun inlineFlattened(): String = error("Dummy cannot be flattened")
+    override fun inlineFlattened(): String = error("${name()} cannot be flattened")
 }
 
 /**
@@ -84,9 +97,8 @@ public interface Ts {
     /** Resolves all dependencies of this type */
     public fun dependencies(): List<Dependency> {
         val deps = mutableListOf<Dependency>()
-        visitDependencies { depType ->
-            Dependency.fromTy(depType)?.let { deps.add(it) }
-        }
+        val visitor = Visit(deps)
+        visitDependencies(visitor)
         return deps
     }
 

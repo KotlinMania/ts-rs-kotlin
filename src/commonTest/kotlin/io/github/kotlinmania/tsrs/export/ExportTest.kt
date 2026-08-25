@@ -65,4 +65,12 @@ class ExportTest {
         assertTrue(userIndex >= 0)
         assertTrue(adminIndex < userIndex)
     }
+
+    @Test
+    fun testExportVisit() {
+        val seen = mutableSetOf<String>()
+        val visit = Visit(seen, "./bindings")
+        assertEquals("./bindings", visit.outDir)
+        assertEquals(0, visit.seen.size)
+    }
 }

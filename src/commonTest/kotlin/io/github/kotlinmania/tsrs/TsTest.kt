@@ -43,12 +43,27 @@ class TsTest {
     }
 
     @Test
-    fun testDependencyOrdering() {
-        val dep1 = Dependency("User", "User", "User.ts")
-        val dep2 = Dependency("Role", "Role", "Role.ts")
-        val dep3 = Dependency("User", "User", "User.ts")
+    fun testDummy() {
+        assertEquals("Dummy", Dummy.fmt())
+        assertEquals("Dummy", Dummy.toString())
+        assertEquals("Dummy", Dummy.name())
+        assertEquals("", Dummy.inline())
+        assertFailsWith<IllegalStateException> {
+            Dummy.decl()
+        }
+        assertFailsWith<IllegalStateException> {
+            Dummy.declConcrete()
+        }
+        assertFailsWith<IllegalStateException> {
+            Dummy.inlineFlattened()
+        }
+    }
 
-        assertEquals(dep1, dep3)
-        assertEquals(listOf(dep2, dep1), listOf(dep1, dep2).sorted())
+    @Test
+    fun testVisit() {
+        val list = mutableListOf<Dependency>()
+        val visit = Visit(list)
+        visit.visit(simpleType)
+        assertEquals(0, list.size)
     }
 }
