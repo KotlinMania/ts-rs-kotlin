@@ -5,10 +5,10 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 7/7 (100.0%)
-- **Function parity:** 39/42 matched (target 176) — 92.9%
-- **Class/type parity:** 7/13 matched (target 42) — 53.8%
-- **Combined symbol parity:** 46/55 matched (target 218) — 83.6%
-- **Average inline-code cosine:** 0.32 (function body across 7 matched files)
+- **Function parity:** 42/42 matched (target 180) — 100.0%
+- **Class/type parity:** 9/13 matched (target 44) — 69.2%
+- **Combined symbol parity:** 51/55 matched (target 224) — 92.7%
+- **Average inline-code cosine:** 0.33 (function body across 7 matched files)
 - **Average documentation cosine:** 0.25 (doc text across 7 matched files)
 - **Cheat-zeroed Files:** 2
 - **Critical Issues:** 6 files with <0.60 function similarity
@@ -30,28 +30,16 @@ Every matched file is listed below with function and type symbol parity.
 ### 1. lib
 
 - **Target:** `tsrs.Ts`
-- **Similarity:** 0.15
+- **Similarity:** 0.18
 - **Dependents:** 0
-- **Priority Score:** 52808.5
-- **Functions:** 18/20 matched (target 30)
-- **Missing functions:** `visit`, `fmt`
-- **Types:** 5/8 matched (target 6)
-- **Missing types:** `Visit`, `TypeVisitor`, `IsOption`
+- **Priority Score:** 22808.2
+- **Functions:** 20/20 matched (target 33)
+- **Missing functions:** _none_
+- **Types:** 6/8 matched (target 7)
+- **Missing types:** `TypeVisitor`, `IsOption`
 - **Lint issues:** 2
 
-### 2. export
-
-- **Target:** `export.Export`
-- **Similarity:** 0.48
-- **Dependents:** 0
-- **Priority Score:** 21505.2
-- **Functions:** 13/14 matched (target 16)
-- **Missing functions:** `visit`
-- **Types:** 0/1 matched
-- **Missing types:** `Visit`
-- **Lint issues:** 1
-
-### 3. chrono
+### 2. chrono
 
 - **Target:** `tsrs.Chrono`
 - **Similarity:** 0.26
@@ -61,6 +49,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/2 matched (target 13)
 - **Missing types:** `WithoutGenerics`, `OptionInnerType`
+
+### 3. export
+
+- **Target:** `export.Export`
+- **Similarity:** 0.53
+- **Dependents:** 0
+- **Priority Score:** 1504.7
+- **Functions:** 14/14 matched (target 17)
+- **Missing functions:** _none_
+- **Types:** 1/1 matched (target 2)
+- **Missing types:** _none_
+- **Lint issues:** 1
 
 ### 4. export.path
 
