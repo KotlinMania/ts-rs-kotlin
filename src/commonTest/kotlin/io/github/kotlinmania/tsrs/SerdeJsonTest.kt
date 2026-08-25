@@ -28,16 +28,22 @@ class SerdeJsonTest {
 
     @Test
     fun testSerdeJsonMap() {
-        val keyType = object : Ts {
-            override fun name(): String = "string"
-            override fun inline(): String = "string"
-            override fun decl(): String = ""
-        }
-        val valType = object : Ts {
-            override fun name(): String = "number"
-            override fun inline(): String = "number"
-            override fun decl(): String = ""
-        }
+        val keyType =
+            object : Ts {
+                override fun name(): String = "string"
+
+                override fun inline(): String = "string"
+
+                override fun decl(): String = ""
+            }
+        val valType =
+            object : Ts {
+                override fun name(): String = "number"
+
+                override fun inline(): String = "number"
+
+                override fun decl(): String = ""
+            }
         val map = SerdeJsonMap(keyType, valType)
         assertEquals("{ [key: string]: number }", map.name())
         assertEquals("{ [key: string]: number }", map.inline())
