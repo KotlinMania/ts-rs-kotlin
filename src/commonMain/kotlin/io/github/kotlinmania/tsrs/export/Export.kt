@@ -153,10 +153,10 @@ public fun exportInto(type: Ts, outDir: String): Result<Unit> {
 /**
  * Recursive export visitor.
  */
-public class Visit(
-    public val seen: MutableSet<String>,
-    public val outDir: String,
-    public var error: Result<Unit>? = null,
+public class Visit internal constructor(
+    internal val seen: MutableSet<String>,
+    internal val outDir: String,
+    internal var error: Result<Unit>? = null,
 ) : TypeVisitor {
     override fun visit(type: Ts) {
         if (error != null || type.outputPath() == null) {
