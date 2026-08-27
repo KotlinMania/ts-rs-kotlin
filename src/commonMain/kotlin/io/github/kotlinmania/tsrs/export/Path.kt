@@ -1,4 +1,4 @@
-// port-lint: source ts-rs/src/export/path.rs
+// port-lint: source export/path.rs
 package io.github.kotlinmania.tsrs.export
 
 private const val ERROR_MESSAGE = """The path provided with `@Ts(exportTo = "..")` is not valid"""
