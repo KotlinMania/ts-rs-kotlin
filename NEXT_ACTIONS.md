@@ -6,8 +6,8 @@ Based on AST analysis, here are the concrete next steps.
 
 - **Files Present:** 7/7 (100.0%)
 - **Function parity:** 42/42 matched (target 182) — 100.0%
-- **Class/type parity:** 9/13 matched (target 44) — 69.2%
-- **Combined symbol parity:** 51/55 matched (target 226) — 92.7%
+- **Class/type parity:** 10/13 matched (target 45) — 76.9%
+- **Combined symbol parity:** 52/55 matched (target 227) — 94.5%
 - **Average inline-code cosine:** 0.33 (function body across 7 matched files)
 - **Average documentation cosine:** 0.25 (doc text across 7 matched files)
 - **Cheat-zeroed Files:** 2
@@ -27,19 +27,7 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. lib
-
-- **Target:** `tsrs.Ts`
-- **Similarity:** 0.18
-- **Dependents:** 0
-- **Priority Score:** 22808.2
-- **Functions:** 20/20 matched (target 34)
-- **Missing functions:** _none_
-- **Types:** 6/8 matched (target 7)
-- **Missing types:** `TypeVisitor`, `IsOption`
-- **Lint issues:** 2
-
-### 2. chrono
+### 1. chrono
 
 - **Target:** `tsrs.Chrono`
 - **Similarity:** 0.26
@@ -49,6 +37,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/2 matched (target 13)
 - **Missing types:** `WithoutGenerics`, `OptionInnerType`
+
+### 2. lib
+
+- **Target:** `tsrs.Ts`
+- **Similarity:** 0.18
+- **Dependents:** 0
+- **Priority Score:** 12808.2
+- **Functions:** 20/20 matched (target 34)
+- **Missing functions:** _none_
+- **Types:** 7/8 matched
+- **Missing types:** `TypeVisitor`
+- **Lint issues:** 2
 
 ### 3. export
 
