@@ -1,4 +1,4 @@
-// port-lint: tests chrono.rs
+// port-lint: tests ts-rs/src/chrono.rs
 package io.github.kotlinmania.tsrs
 
 import kotlin.test.Test
