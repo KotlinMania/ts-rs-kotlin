@@ -32,6 +32,12 @@ public interface WithoutGenerics : Ts
 public interface OptionInnerType
 
 /**
+ * Marker interface for types that represent an Option.
+ */
+public interface IsOption
+
+
+/**
  * Dummy placeholder type for generics resolution.
  */
 public object Dummy : Ts {
