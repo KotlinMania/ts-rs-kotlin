@@ -1,4 +1,4 @@
-// port-lint: tests tokio.rs
+// port-lint: tests ts-rs/src/tokio.rs
 package io.github.kotlinmania.tsrs
 
 import kotlin.test.Test
