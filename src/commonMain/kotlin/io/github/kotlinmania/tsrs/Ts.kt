@@ -36,7 +36,6 @@ public interface OptionInnerType
  */
 public interface IsOption
 
-
 /**
  * Dummy placeholder type for generics resolution.
  */
