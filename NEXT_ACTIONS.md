@@ -5,12 +5,12 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 7/7 (100.0%)
-- **Function parity:** 42/42 matched (target 182) — 100.0%
-- **Class/type parity:** 10/13 matched (target 45) — 76.9%
-- **Combined symbol parity:** 52/55 matched (target 227) — 94.5%
+- **Function parity:** 42/42 matched (target 103) — 100.0%
+- **Class/type parity:** 9/12 matched (target 31) — 75.0%
+- **Combined symbol parity:** 51/54 matched (target 134) — 94.4%
 - **Average inline-code cosine:** 0.33 (function body across 7 matched files)
 - **Average documentation cosine:** 0.25 (doc text across 7 matched files)
-- **Cheat-zeroed Files:** 2
+- **Cheat-zeroed Files:** 0
 - **Critical Issues:** 6 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -73,18 +73,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 5. serde_json
-
-- **Target:** `tsrs.SerdeJson [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 110.0
-- **Functions:** 0/0 matched (target 45)
-- **Missing functions:** _none_
-- **Types:** 1/1 matched (target 10)
-- **Missing types:** _none_
-
-### 6. export.error
+### 5. export.error
 
 - **Target:** `export.ExportError`
 - **Similarity:** 1.00
@@ -95,17 +84,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 7)
 - **Missing types:** _none_
 
-### 7. tokio
-
-- **Target:** `tsrs.Tokio [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 34)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 4)
-- **Missing types:** _none_
-
 ## Success Criteria
 
 For each file to be considered "complete":
@@ -114,4 +92,18 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
+
+## Reexport / Wiring Modules
+
+These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
+normal priority and missing-file ladders because they are wiring
+modules, not direct logic ports. Consult them for call-site routing;
+do not treat them as the next implementation target by default.
+
+### Matched
+
+| Source | Target | Path |
+|--------|--------|------|
+| `serde_json` | `tsrs.SerdeJson` | `serde_json` |
+| `tokio` | `tsrs.Tokio` | `tokio` |
 
