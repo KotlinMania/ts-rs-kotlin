@@ -1,4 +1,4 @@
-// port-lint: source ts-rs/src/lib.rs
+// port-lint: source lib.rs
 package io.github.kotlinmania.tsrs
 
 import io.github.kotlinmania.tsrs.export.ExportError
@@ -37,7 +37,7 @@ public interface OptionInnerType
 public interface IsOption
 
 /**
- * Dummy placeholder type for generics resolution.
+ * Dummy fallback type for generics resolution.
  */
 public object Dummy : Ts {
     public fun fmt(): String = "Dummy"
