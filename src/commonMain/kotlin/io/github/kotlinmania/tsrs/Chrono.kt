@@ -1,4 +1,4 @@
-// port-lint: source chrono.rs
+// port-lint: source ts-rs/src/chrono.rs
 package io.github.kotlinmania.tsrs
 
 /**
