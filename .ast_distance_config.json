@@ -15,5 +15,16 @@
     "todos": true,
     "lint": true
   },
-  "reexport_modules": ["serde_json", "tokio"]
+  "reexport_modules": [
+    "serde_json",
+    "serde_json.rs",
+    "ts-rs/src/serde_json.rs",
+    "ts_rs.serde_json",
+    "tokio",
+    "tokio.rs",
+    "ts-rs/src/tokio.rs",
+    "ts_rs.tokio",
+    "mod.rs",
+    "lib.rs"
+  ]
 }

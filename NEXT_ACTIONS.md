@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 7/7 (100.0%)
-- **Function parity:** 42/42 matched (target 103) — 100.0%
-- **Class/type parity:** 9/12 matched (target 31) — 75.0%
-- **Combined symbol parity:** 51/54 matched (target 134) — 94.4%
+- **Files Present:** 7/81 (8.6%)
+- **Function parity:** 42/229 matched (target 103) — 18.3%
+- **Class/type parity:** 9/336 matched (target 31) — 2.7%
+- **Combined symbol parity:** 51/565 matched (target 134) — 9.0%
 - **Average inline-code cosine:** 0.36 (function body across 6 matched files)
 - **Average documentation cosine:** 0.19 (doc text across 6 matched files)
 - **Cheat-zeroed Files:** 1
@@ -27,9 +27,31 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. chrono
+### 1. export.path
 
-- **Target:** `tsrs.Chrono [PROVENANCE-FALLBACK]`
+- **Target:** `export.Path`
+- **Similarity:** 0.37
+- **Dependents:** 1
+- **Priority Score:** 1000206.3
+- **Functions:** 2/2 matched (target 11)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 2. export.error
+
+- **Target:** `export.ExportError`
+- **Similarity:** 1.00
+- **Dependents:** 1
+- **Priority Score:** 1000100.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 1/1 matched (target 7)
+- **Missing types:** _none_
+
+### 3. ts-rs.chrono
+
+- **Target:** `tsrs.Chrono`
 - **Similarity:** 0.26
 - **Dependents:** 0
 - **Priority Score:** 20807.4
@@ -37,15 +59,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/2 matched (target 13)
 - **Missing types:** `WithoutGenerics`, `OptionInnerType`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `ts-rs/src/chrono.rs` vs expected `chrono.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:ts-rs/src/chrono.rs` vs expected `chrono.rs`
-- **Proposed provenance header:** `// port-lint: source chrono.rs` (current: `// port-lint: source ts-rs/src/chrono.rs`)
-- **Proposed provenance header:** `// port-lint: tests chrono.rs` (current: `// port-lint: tests ts-rs/src/chrono.rs`)
-- **Lint issues:** 2
 
-### 2. lib
+### 4. ts-rs.lib
 
-- **Target:** `tsrs.Ts [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `tsrs.Ts [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 12810.0
@@ -53,17 +70,11 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 7/8 matched
 - **Missing types:** `TypeVisitor`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `ts-rs/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `ts-rs/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:ts-rs/src/lib.rs` vs expected `lib.rs`
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source ts-rs/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source ts-rs/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: tests lib.rs` (current: `// port-lint: tests ts-rs/src/lib.rs`)
-- **Lint issues:** 5
+- **Lint issues:** 2
 
-### 3. export
+### 5. ts-rs.export
 
-- **Target:** `export.Export [PROVENANCE-FALLBACK]`
+- **Target:** `export.Export`
 - **Similarity:** 0.53
 - **Dependents:** 0
 - **Priority Score:** 1504.7
@@ -71,40 +82,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `ts-rs/src/export.rs` vs expected `export.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:ts-rs/src/export.rs` vs expected `export.rs`
-- **Proposed provenance header:** `// port-lint: source export.rs` (current: `// port-lint: source ts-rs/src/export.rs`)
-- **Proposed provenance header:** `// port-lint: tests export.rs` (current: `// port-lint: tests ts-rs/src/export.rs`)
-- **Lint issues:** 3
-
-### 4. export.path
-
-- **Target:** `export.Path [PROVENANCE-FALLBACK]`
-- **Similarity:** 0.37
-- **Dependents:** 0
-- **Priority Score:** 206.3
-- **Functions:** 2/2 matched (target 11)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `ts-rs/src/export/path.rs` vs expected `export/path.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:ts-rs/src/export/path.rs` vs expected `export/path.rs`
-- **Proposed provenance header:** `// port-lint: source export/path.rs` (current: `// port-lint: source ts-rs/src/export/path.rs`)
-- **Proposed provenance header:** `// port-lint: tests export/path.rs` (current: `// port-lint: tests ts-rs/src/export/path.rs`)
-- **Lint issues:** 2
-
-### 5. export.error
-
-- **Target:** `export.ExportError [PROVENANCE-FALLBACK]`
-- **Similarity:** 1.00
-- **Dependents:** 0
-- **Priority Score:** 100.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 1/1 matched (target 7)
-- **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `ts-rs/src/export/error.rs` vs expected `export/error.rs`
-- **Proposed provenance header:** `// port-lint: source export/error.rs` (current: `// port-lint: source ts-rs/src/export/error.rs`)
 - **Lint issues:** 1
 
 ## Success Criteria
@@ -127,6 +104,13 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `serde_json` | `tsrs.SerdeJson` | `serde_json` |
-| `tokio` | `tsrs.Tokio` | `tokio` |
+| `ts-rs.serde_json` | `tsrs.SerdeJson` | `ts-rs/src/serde_json` |
+| `ts-rs.tokio` | `tsrs.Tokio` | `ts-rs/src/tokio` |
+
+### Missing
+
+| Source | Expected target | Deps | Source path | Expected path |
+|--------|-----------------|------|-------------|---------------|
+| `integration.serde_json` | `tsrs.tests.integration.SerdeJson` | 0 | `ts-rs/tests/integration/serde_json.rs` | `tsrs/tests/integration/SerdeJson.kt` |
+| `integration.tokio` | `tsrs.tests.integration.Tokio` | 0 | `ts-rs/tests/integration/tokio.rs` | `tsrs/tests/integration/Tokio.kt` |
 
