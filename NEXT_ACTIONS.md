@@ -4,13 +4,13 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 7/81 (8.6%)
-- **Function parity:** 42/229 matched (target 103) — 18.3%
-- **Class/type parity:** 9/336 matched (target 31) — 2.7%
-- **Combined symbol parity:** 51/565 matched (target 134) — 9.0%
-- **Average inline-code cosine:** 0.36 (function body across 6 matched files)
-- **Average documentation cosine:** 0.19 (doc text across 6 matched files)
-- **Cheat-zeroed Files:** 1
+- **Files Present:** 7/7 (100.0%)
+- **Function parity:** 42/42 matched (target 103) — 100.0%
+- **Class/type parity:** 9/12 matched (target 31) — 75.0%
+- **Combined symbol parity:** 51/54 matched (target 134) — 94.4%
+- **Average inline-code cosine:** 0.33 (function body across 7 matched files)
+- **Average documentation cosine:** 0.25 (doc text across 7 matched files)
+- **Cheat-zeroed Files:** 0
 - **Critical Issues:** 6 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -27,29 +27,7 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. export.path
-
-- **Target:** `export.Path`
-- **Similarity:** 0.37
-- **Dependents:** 1
-- **Priority Score:** 1000206.3
-- **Functions:** 2/2 matched (target 11)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 2. export.error
-
-- **Target:** `export.ExportError`
-- **Similarity:** 1.00
-- **Dependents:** 1
-- **Priority Score:** 1000100.0
-- **Functions:** 0/0 matched
-- **Missing functions:** _none_
-- **Types:** 1/1 matched (target 7)
-- **Missing types:** _none_
-
-### 3. ts-rs.chrono
+### 1. chrono
 
 - **Target:** `tsrs.Chrono`
 - **Similarity:** 0.26
@@ -60,19 +38,19 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/2 matched (target 13)
 - **Missing types:** `WithoutGenerics`, `OptionInnerType`
 
-### 4. ts-rs.lib
+### 2. lib
 
-- **Target:** `tsrs.Ts [STUB]`
-- **Similarity:** 0.00
+- **Target:** `tsrs.Ts`
+- **Similarity:** 0.18
 - **Dependents:** 0
-- **Priority Score:** 12810.0
+- **Priority Score:** 12808.2
 - **Functions:** 20/20 matched (target 34)
 - **Missing functions:** _none_
 - **Types:** 7/8 matched
 - **Missing types:** `TypeVisitor`
 - **Lint issues:** 2
 
-### 5. ts-rs.export
+### 3. export
 
 - **Target:** `export.Export`
 - **Similarity:** 0.53
@@ -83,6 +61,28 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 - **Lint issues:** 1
+
+### 4. export.path
+
+- **Target:** `export.Path`
+- **Similarity:** 0.37
+- **Dependents:** 0
+- **Priority Score:** 206.3
+- **Functions:** 2/2 matched (target 11)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 5. export.error
+
+- **Target:** `export.ExportError`
+- **Similarity:** 1.00
+- **Dependents:** 0
+- **Priority Score:** 100.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 1/1 matched (target 7)
+- **Missing types:** _none_
 
 ## Success Criteria
 
@@ -104,13 +104,6 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `ts-rs.serde_json` | `tsrs.SerdeJson` | `ts-rs/src/serde_json` |
-| `ts-rs.tokio` | `tsrs.Tokio` | `ts-rs/src/tokio` |
-
-### Missing
-
-| Source | Expected target | Deps | Source path | Expected path |
-|--------|-----------------|------|-------------|---------------|
-| `integration.serde_json` | `tsrs.tests.integration.SerdeJson` | 0 | `ts-rs/tests/integration/serde_json.rs` | `tsrs/tests/integration/SerdeJson.kt` |
-| `integration.tokio` | `tsrs.tests.integration.Tokio` | 0 | `ts-rs/tests/integration/tokio.rs` | `tsrs/tests/integration/Tokio.kt` |
+| `serde_json` | `tsrs.SerdeJson` | `serde_json` |
+| `tokio` | `tsrs.Tokio` | `tokio` |
 

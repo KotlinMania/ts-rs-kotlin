@@ -1,4 +1,4 @@
-// port-lint: source ts-rs/src/tokio.rs
+// port-lint: source tokio.rs
 package io.github.kotlinmania.tsrs
 
 /**
