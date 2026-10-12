@@ -5,11 +5,11 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 7/7 (100.0%)
-- **Function parity:** 42/42 matched (target 103) — 100.0%
-- **Class/type parity:** 9/12 matched (target 31) — 75.0%
-- **Combined symbol parity:** 51/54 matched (target 134) — 94.4%
+- **Function parity:** 42/42 matched (target 104) — 100.0%
+- **Class/type parity:** 12/12 matched (target 34) — 100.0%
+- **Combined symbol parity:** 54/54 matched (target 138) — 100.0%
 - **Average inline-code cosine:** 0.33 (function body across 7 matched files)
-- **Average documentation cosine:** 0.25 (doc text across 7 matched files)
+- **Average documentation cosine:** 0.28 (doc text across 7 matched files)
 - **Cheat-zeroed Files:** 0
 - **Critical Issues:** 6 files with <0.60 function similarity
 
@@ -27,40 +27,38 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. chrono
+### 1. lib
+
+- **Target:** `tsrs.Ts`
+- **Similarity:** 0.17
+- **Dependents:** 0
+- **Priority Score:** 2808.3
+- **Functions:** 20/20 matched (target 34)
+- **Missing functions:** _none_
+- **Types:** 8/8 matched (target 9)
+- **Missing types:** _none_
+
+### 2. export
+
+- **Target:** `export.Export`
+- **Similarity:** 0.52
+- **Dependents:** 0
+- **Priority Score:** 1504.8
+- **Functions:** 14/14 matched (target 19)
+- **Missing functions:** _none_
+- **Types:** 1/1 matched (target 2)
+- **Missing types:** _none_
+
+### 3. chrono
 
 - **Target:** `tsrs.Chrono`
 - **Similarity:** 0.26
 - **Dependents:** 0
-- **Priority Score:** 20807.4
+- **Priority Score:** 807.4
 - **Functions:** 6/6 matched (target 40)
 - **Missing functions:** _none_
-- **Types:** 0/2 matched (target 13)
-- **Missing types:** `WithoutGenerics`, `OptionInnerType`
-
-### 2. lib
-
-- **Target:** `tsrs.Ts`
-- **Similarity:** 0.18
-- **Dependents:** 0
-- **Priority Score:** 12808.2
-- **Functions:** 20/20 matched (target 34)
-- **Missing functions:** _none_
-- **Types:** 7/8 matched
-- **Missing types:** `TypeVisitor`
-- **Lint issues:** 2
-
-### 3. export
-
-- **Target:** `export.Export`
-- **Similarity:** 0.53
-- **Dependents:** 0
-- **Priority Score:** 1504.7
-- **Functions:** 14/14 matched (target 18)
-- **Missing functions:** _none_
-- **Types:** 1/1 matched (target 2)
+- **Types:** 2/2 matched (target 15)
 - **Missing types:** _none_
-- **Lint issues:** 1
 
 ### 4. export.path
 
