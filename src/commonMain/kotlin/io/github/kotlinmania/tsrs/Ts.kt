@@ -5,8 +5,11 @@ import io.github.kotlinmania.tsrs.export.ExportError
 
 /**
  * A visitor used to iterate over all dependencies or generics of a type.
+ * When an instance of [TypeVisitor] is passed to [Ts.visitDependencies] or
+ * [Ts.visitGenerics], the [TypeVisitor.visit] method will be invoked for every dependency
+ * or generic parameter respectively.
  */
-public fun interface TypeVisitor {
+public interface TypeVisitor {
     public fun visit(type: Ts)
 }
 
@@ -59,49 +62,88 @@ public object Dummy : Ts {
  * A type which can be represented in TypeScript.
  */
 public interface Ts {
-    /** JSDoc comment to describe this type in TypeScript */
+    /**
+     * JSDoc comment to describe this type in TypeScript.
+     * When Ts is derived, docs are automatically read from doc comments.
+     */
     public fun docs(): String? = null
 
-    /** Identifier of this type, excluding generic parameters */
+    /**
+     * Identifier of this type, excluding generic parameters.
+     */
     public fun ident(): String {
         val n = name()
         val idx = n.indexOf('<')
         return if (idx >= 0) n.substring(0, idx) else n
     }
 
-    /** Declaration of this type, e.g. `type User = { userId: number, ... }` */
+    /**
+     * Declaration of this type, e.g. `type User = { userId: number, ... }`.
+     * This function will throw if the type has no declaration.
+     *
+     * If this type is generic, then all provided generic parameters will be swapped for
+     * placeholders, resulting in a generic typescript definition.
+     */
     public fun decl(): String
 
-    /** Declaration of this type using supplied generic arguments */
+    /**
+     * Declaration of this type using the supplied generic arguments.
+     * The resulting TypeScript definition will not be generic. For that, see [decl].
+     * If this type is not generic, then this function is equivalent to [decl].
+     */
     public fun declConcrete(): String = decl()
 
-    /** Name of this type in TypeScript, including generic parameters */
+    /**
+     * Name of this type in TypeScript, including generic parameters.
+     */
     public fun name(): String
 
-    /** Formats this type definition in TypeScript, e.g. `{ userId: number }` */
+    /**
+     * Formats this type definition in TypeScript, e.g `{ userId: number }`.
+     * This function will throw if the type cannot be inlined.
+     */
     public fun inline(): String
 
-    /** Flatten a type declaration */
+    /**
+     * Flatten a type declaration.
+     * This function will throw if the type cannot be flattened.
+     */
     public fun inlineFlattened(): String = error("${name()} cannot be flattened")
 
-    /** Returns the output path to where the type should be exported */
+    /**
+     * Returns the output path to where the type should be exported.
+     * The returned path does not include the base directory.
+     * To get the output path containing the base directory, use [defaultOutputPath].
+     * If the type cannot be exported, this function will return null.
+     */
     public fun outputPath(): String? = null
 
-    /** Returns the default output path including default directory */
+    /**
+     * Returns the output path to where the type should be exported, including default directory.
+     * If the type cannot be exported, this function will return null.
+     */
     public fun defaultOutputPath(baseDir: String = "./bindings"): String? {
         val path = outputPath() ?: return null
         return "${baseDir.trimEnd('/')}/$path"
     }
 
-    /** Iterates over all dependencies of this type */
+    /**
+     * Iterates over all dependencies of this type.
+     */
     public fun visitDependencies(visitor: TypeVisitor) {
+        visitor.run {}
     }
 
-    /** Iterates over all type parameters of this type */
+    /**
+     * Iterates over all type parameters of this type.
+     */
     public fun visitGenerics(visitor: TypeVisitor) {
+        visitor.run {}
     }
 
-    /** Resolves all dependencies of this type */
+    /**
+     * Resolves all dependencies of this type recursively.
+     */
     public fun dependencies(): List<Dependency> {
         val deps = mutableListOf<Dependency>()
         val visitor = Visit(deps)
@@ -109,12 +151,17 @@ public interface Ts {
         return deps
     }
 
-    /** Manually export this type definition to string */
+    /**
+     * Manually generate bindings for this type, returning a String.
+     */
     public fun exportToString(): Result<String> =
         io.github.kotlinmania.tsrs.export
             .exportToString(this)
 
-    /** Manually export this type to default path */
+    /**
+     * Manually export this type to the filesystem.
+     * To export this type together with all of its dependencies, use [exportAll].
+     */
     public fun export(): Result<Unit> {
         val path =
             defaultOutputPath() ?: return Result.failure(
@@ -124,20 +171,30 @@ public interface Ts {
             .exportTo(this, path)
     }
 
-    /** Manually export this type and all dependencies */
+    /**
+     * Manually export this type to the filesystem, together with all of its dependencies.
+     * To export only this type, without its dependencies, use [export].
+     */
     public fun exportAll(baseDir: String = "./bindings"): Result<Unit> =
         io.github.kotlinmania.tsrs.export
             .exportAllInto(this, baseDir)
 
-    /** Manually export this type and all dependencies to given directory */
+    /**
+     * Manually export this type into the given directory, together with all of its dependencies.
+     * To export only this type, without its dependencies, use [export].
+     */
     public fun exportAllTo(outDir: String): Result<Unit> =
         io.github.kotlinmania.tsrs.export
             .exportAllInto(this, outDir)
 
-    /** Whether this type represents an optional / nullable type */
+    /**
+     * Whether this type represents an optional / nullable type.
+     */
     public val isOption: Boolean get() = false
 
-    /** Formats doc comment into JSDoc style */
+    /**
+     * Formats doc comment into JSDoc style.
+     */
     public fun formatDocs(): String? {
         val d = docs() ?: return null
         return "/**\n * " + d.lines().joinToString("\n * ") + "\n */\n"

@@ -5,7 +5,7 @@ package io.github.kotlinmania.tsrs
  * TypeScript representation for chrono types.
  */
 public object ChronoTypes {
-    public object NaiveDateTime : Ts {
+    public object NaiveDateTime : WithoutGenerics, OptionInnerType {
         override fun name(): String = "string"
 
         override fun inline(): String = "string"
@@ -13,7 +13,7 @@ public object ChronoTypes {
         override fun decl(): String = error("NaiveDateTime cannot be declared")
     }
 
-    public object NaiveDate : Ts {
+    public object NaiveDate : WithoutGenerics, OptionInnerType {
         override fun name(): String = "string"
 
         override fun inline(): String = "string"
@@ -21,7 +21,7 @@ public object ChronoTypes {
         override fun decl(): String = error("NaiveDate cannot be declared")
     }
 
-    public object NaiveTime : Ts {
+    public object NaiveTime : WithoutGenerics, OptionInnerType {
         override fun name(): String = "string"
 
         override fun inline(): String = "string"
@@ -29,7 +29,7 @@ public object ChronoTypes {
         override fun decl(): String = error("NaiveTime cannot be declared")
     }
 
-    public object Month : Ts {
+    public object Month : WithoutGenerics, OptionInnerType {
         override fun name(): String = "string"
 
         override fun inline(): String = "string"
@@ -37,7 +37,7 @@ public object ChronoTypes {
         override fun decl(): String = error("Month cannot be declared")
     }
 
-    public object Weekday : Ts {
+    public object Weekday : WithoutGenerics, OptionInnerType {
         override fun name(): String = "string"
 
         override fun inline(): String = "string"
@@ -45,7 +45,7 @@ public object ChronoTypes {
         override fun decl(): String = error("Weekday cannot be declared")
     }
 
-    public object Duration : Ts {
+    public object Duration : WithoutGenerics, OptionInnerType {
         override fun name(): String = "[number, number]"
 
         override fun inline(): String = "[number, number]"
@@ -53,7 +53,7 @@ public object ChronoTypes {
         override fun decl(): String = error("Duration cannot be declared")
     }
 
-    public object Utc : Ts {
+    public object Utc : WithoutGenerics, OptionInnerType {
         override fun name(): String = ""
 
         override fun inline(): String = ""
@@ -61,7 +61,7 @@ public object ChronoTypes {
         override fun decl(): String = error("Utc cannot be declared")
     }
 
-    public object Local : Ts {
+    public object Local : WithoutGenerics, OptionInnerType {
         override fun name(): String = ""
 
         override fun inline(): String = ""
@@ -69,7 +69,7 @@ public object ChronoTypes {
         override fun decl(): String = error("Local cannot be declared")
     }
 
-    public object FixedOffset : Ts {
+    public object FixedOffset : WithoutGenerics, OptionInnerType {
         override fun name(): String = ""
 
         override fun inline(): String = ""
@@ -79,7 +79,8 @@ public object ChronoTypes {
 
     public open class DateTime<T : Ts>(
         public val tz: T,
-    ) : Ts {
+    ) : WithoutGenerics,
+        OptionInnerType {
         override fun ident(): String = "string"
 
         override fun name(): String = "string"
@@ -95,7 +96,8 @@ public object ChronoTypes {
 
     public open class Date<T : Ts>(
         public val tz: T,
-    ) : Ts {
+    ) : WithoutGenerics,
+        OptionInnerType {
         override fun ident(): String = "string"
 
         override fun name(): String = "string"

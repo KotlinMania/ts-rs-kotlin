@@ -73,4 +73,21 @@ class ExportTest {
         assertEquals("./bindings", visit.outDir)
         assertEquals(0, visit.seen.size)
     }
+
+    @Test
+    fun testExportAndMerge() {
+        val path = "/test/export/path.ts"
+        val decl1 = "$NOTE\n\nexport type User = { id: number };\n"
+        val decl2 = "$NOTE\n\nexport type Admin = { user: User, role: string };\n"
+
+        exportAndMerge(path, "User", decl1).getOrThrow()
+        assertEquals(decl1, getExportFiles()[path])
+        assertEquals(setOf("User"), getExportPaths()[path])
+
+        exportAndMerge(path, "Admin", decl2).getOrThrow()
+        val merged = getExportFiles()[path]
+        assertTrue(merged != null && merged.contains("export type Admin"))
+        assertTrue(merged.contains("export type User"))
+        assertEquals(setOf("User", "Admin"), getExportPaths()[path])
+    }
 }
