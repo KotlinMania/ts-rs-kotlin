@@ -13,8 +13,11 @@ private const val HEADER_ERROR_MESSAGE =
 private const val DECLARATION_START = "export type "
 
 private val exportPaths: MutableMap<String, MutableSet<String>> = mutableMapOf()
+private val exportFiles: MutableMap<String, String> = mutableMapOf()
 
 public fun getExportPaths(): Map<String, Set<String>> = exportPaths
+
+public fun getExportFiles(): Map<String, String> = exportFiles
 
 public fun defaultOutDir(envDir: String? = null): String =
     envDir ?: "./bindings"
@@ -187,10 +190,20 @@ private fun exportRecursive(type: Ts, seen: MutableSet<String>, outDir: String):
 
 /**
  * Merges and saves or registers export in export paths.
+ * Exports the type to a new file if the file hasn't yet been written to.
+ * Otherwise, finds its place in the already existing file and inserts it.
  */
 public fun exportAndMerge(path: String, typeName: String, generatedType: String): Result<Unit> {
     val entry = exportPaths.getOrPut(path) { mutableSetOf() }
     if (entry.contains(typeName)) return Result.success(Unit)
+    val existing = exportFiles[path]
+    val merged =
+        if (existing == null) {
+            generatedType
+        } else {
+            merge(existing, generatedType)
+        }
+    exportFiles[path] = merged
     entry.add(typeName)
     return Result.success(Unit)
 }
