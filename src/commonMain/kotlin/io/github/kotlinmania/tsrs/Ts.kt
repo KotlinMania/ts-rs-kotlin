@@ -1,4 +1,3 @@
-// port-lint: source lib.rs
 package io.github.kotlinmania.tsrs
 
 import io.github.kotlinmania.tsrs.export.ExportError
