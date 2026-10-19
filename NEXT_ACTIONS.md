@@ -4,14 +4,14 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 7/7 (100.0%)
-- **Function parity:** 42/42 matched (target 104) — 100.0%
-- **Class/type parity:** 12/12 matched (target 34) — 100.0%
-- **Combined symbol parity:** 54/54 matched (target 138) — 100.0%
-- **Average inline-code cosine:** 0.33 (function body across 7 matched files)
-- **Average documentation cosine:** 0.28 (doc text across 7 matched files)
+- **Files Present:** 4/7 (57.1%)
+- **Function parity:** 22/22 matched (target 70) — 100.0%
+- **Class/type parity:** 2/4 matched (target 23) — 50.0%
+- **Combined symbol parity:** 24/26 matched (target 93) — 92.3%
+- **Average inline-code cosine:** 0.63 (function body across 4 matched files)
+- **Average documentation cosine:** 0.30 (doc text across 4 matched files)
 - **Cheat-zeroed Files:** 0
-- **Critical Issues:** 6 files with <0.60 function similarity
+- **Critical Issues:** 2 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -27,16 +27,16 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. lib
+### 1. chrono
 
-- **Target:** `tsrs.Ts`
-- **Similarity:** 0.17
+- **Target:** `tsrs.Chrono`
+- **Similarity:** 0.26
 - **Dependents:** 0
-- **Priority Score:** 2808.3
-- **Functions:** 20/20 matched (target 34)
+- **Priority Score:** 20807.4
+- **Functions:** 6/6 matched (target 40)
 - **Missing functions:** _none_
-- **Types:** 8/8 matched (target 9)
-- **Missing types:** _none_
+- **Types:** 0/2 matched (target 13)
+- **Missing types:** `WithoutGenerics`, `OptionInnerType`
 
 ### 2. export
 
@@ -44,34 +44,23 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.52
 - **Dependents:** 0
 - **Priority Score:** 1504.8
-- **Functions:** 14/14 matched (target 19)
+- **Functions:** 14/14 matched (target 20)
 - **Missing functions:** _none_
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 
-### 3. chrono
-
-- **Target:** `tsrs.Chrono`
-- **Similarity:** 0.26
-- **Dependents:** 0
-- **Priority Score:** 807.4
-- **Functions:** 6/6 matched (target 40)
-- **Missing functions:** _none_
-- **Types:** 2/2 matched (target 15)
-- **Missing types:** _none_
-
-### 4. export.path
+### 3. export.path
 
 - **Target:** `export.Path`
-- **Similarity:** 0.37
+- **Similarity:** 0.75
 - **Dependents:** 0
-- **Priority Score:** 206.3
-- **Functions:** 2/2 matched (target 11)
+- **Priority Score:** 202.5
+- **Functions:** 2/2 matched (target 10)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 5. export.error
+### 4. export.error
 
 - **Target:** `export.ExportError`
 - **Similarity:** 1.00
@@ -98,10 +87,11 @@ normal priority and missing-file ladders because they are wiring
 modules, not direct logic ports. Consult them for call-site routing;
 do not treat them as the next implementation target by default.
 
-### Matched
+### Missing
 
-| Source | Target | Path |
-|--------|--------|------|
-| `serde_json` | `tsrs.SerdeJson` | `serde_json` |
-| `tokio` | `tsrs.Tokio` | `tokio` |
+| Source | Expected target | Deps | Source path | Expected path |
+|--------|-----------------|------|-------------|---------------|
+| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
+| `serde_json` | `SerdeJson` | 0 | `serde_json.rs` | `SerdeJson.kt` |
+| `tokio` | `Tokio` | 0 | `tokio.rs` | `Tokio.kt` |
 

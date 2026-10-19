@@ -4,72 +4,77 @@ package io.github.kotlinmania.tsrs.export
 private const val ERROR_MESSAGE = """The path provided with `@Ts(exportTo = "..")` is not valid"""
 private const val ROOT = "/"
 
-internal fun absolute(path: String, currentDirectory: String = "."): Result<String> =
-    clean(joinPath(currentDirectory, path))
+internal fun absolute(path: String, currentDirectory: String = "."): Result<String> {
+    val fullPath = joinPath(currentDirectory, path)
+    val out = mutableListOf<String>()
 
-internal fun diffPaths(path: String, base: String, currentDirectory: String = "."): Result<String> {
-    val pathComponents = absolute(path, currentDirectory).getOrElse { return Result.failure(it) }.components()
-    val baseComponents = absolute(base, currentDirectory).getOrElse { return Result.failure(it) }.components()
-
-    val output = mutableListOf<String>()
-    var pathIndex = 0
-    var baseIndex = 0
-
-    while (true) {
-        val pathComponent = pathComponents.getOrNull(pathIndex)
-        val baseComponent = baseComponents.getOrNull(baseIndex)
-
-        when {
-            pathComponent == "." || pathComponent == ".." || baseComponent == "." || baseComponent == ".." ->
-                error("The paths have been cleaned, so no '.' or '..' components are present")
-            pathComponent == null && baseComponent == null ->
-                return Result.success(output.toPathString())
-            pathComponent != null && baseComponent == null -> {
-                output += pathComponents.drop(pathIndex)
-                return Result.success(output.toPathString())
-            }
-            pathComponent == null -> {
-                output += ".."
-                baseIndex += 1
-            }
-            output.isEmpty() && pathComponent == baseComponent -> {
-                pathIndex += 1
-                baseIndex += 1
-            }
-            else -> {
-                output += ".."
-                output += baseComponents.drop(baseIndex + 1).map { ".." }
-                output += pathComponent
-                output += pathComponents.drop(pathIndex + 1)
-                return Result.success(output.toPathString())
-            }
-        }
-    }
-}
-
-private fun clean(path: String): Result<String> {
-    val output = mutableListOf<String>()
-
-    for (component in path.components()) {
-        when (component) {
+    for (comp in fullPath.components()) {
+        when (comp) {
             "." -> Unit
             ".." -> {
-                if (output.isEmpty()) {
+                if (out.isEmpty()) {
                     return Result.failure(ExportError.CannotBeExported(ERROR_MESSAGE))
                 }
-                output.removeAt(output.lastIndex)
+                out.removeAt(out.lastIndex)
             }
-            else -> output += component
+            else -> out.add(comp)
         }
     }
 
     return Result.success(
-        if (output.isNotEmpty()) {
-            output.toPathString()
+        if (out.isNotEmpty()) {
+            out.toPathString()
         } else {
             "."
         },
     )
+}
+
+internal fun diffPaths(path: String, base: String, currentDirectory: String = "."): Result<String> {
+    val pathResolved = absolute(path, currentDirectory).getOrElse { return Result.failure(it) }
+    val baseResolved = absolute(base, currentDirectory).getOrElse { return Result.failure(it) }
+
+    val ita = pathResolved.components().iterator()
+    val itb = baseResolved.components().iterator()
+    val comps = mutableListOf<String>()
+
+    var nextA: String? = if (ita.hasNext()) ita.next() else null
+    var nextB: String? = if (itb.hasNext()) itb.next() else null
+
+    while (true) {
+        val a = nextA
+        val b = nextB
+        when {
+            a == "." || a == ".." || b == "." || b == ".." ->
+                error("The paths have been cleaned, no '.' or '..' components are present")
+            a == null && b == null -> break
+            a != null && b == null -> {
+                comps.add(a)
+                while (ita.hasNext()) comps.add(ita.next())
+                break
+            }
+            a == null -> {
+                comps.add("..")
+                nextB = if (itb.hasNext()) itb.next() else null
+            }
+            comps.isEmpty() && a == b -> {
+                nextA = if (ita.hasNext()) ita.next() else null
+                nextB = if (itb.hasNext()) itb.next() else null
+            }
+            else -> {
+                comps.add("..")
+                while (itb.hasNext()) {
+                    itb.next()
+                    comps.add("..")
+                }
+                comps.add(a)
+                while (ita.hasNext()) comps.add(ita.next())
+                break
+            }
+        }
+    }
+
+    return Result.success(comps.toPathString())
 }
 
 private fun joinPath(base: String, path: String): String =

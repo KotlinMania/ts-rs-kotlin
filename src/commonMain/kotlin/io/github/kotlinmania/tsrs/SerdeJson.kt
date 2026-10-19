@@ -1,4 +1,3 @@
-// port-lint: source serde_json.rs
 package io.github.kotlinmania.tsrs
 
 /**
